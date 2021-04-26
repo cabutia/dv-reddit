@@ -19,4 +19,16 @@ class PostController extends Controller
         return back()
             ->withSuccessMessage('Post created successfully!');
     }
+
+    public function delete(Request $request) {
+        $request->validate([
+            'id' => 'numeric|exists:posts,id'
+        ]);
+        
+        $post = Post::find($request->get('id'));
+        $post->delete();
+
+        return back()
+            ->withSuccessMessage('Post (id: ' . $post->id . ') deleted successfully!');
+    }
 }   

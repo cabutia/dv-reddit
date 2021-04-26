@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{ config('app.name') }}</title>
-  <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-</head>
-<body class="bg-gray-100">
-  <div class="container mx-auto bg-white mt-12">
-    <div class="px-6 py-4">
-      <h1 class="text-4xl font-bold text-center">{{ config('app.name') }}</h1>
+@extends('layouts.web')
+
+@section('footer')
+  <div class="bg-red-100 px-4 py-2">
+    <div class="container mx-auto">
+      <h1>I'm a footer</h1>
     </div>
+  </div>
+@endsection
+
+@section('content')
+  <div class="container mx-auto bg-white mt-12">
     <div class="w-2/3 py-4">
-      <form class="w-full px-6" action="/post/create" method="POST">
+      <form class="w-full px-6" action="{{ route('post.create') }}" method="POST">
         @csrf
         <div class="flex flex-col mb-4">
           @if(Session::has('success_message'))
@@ -42,6 +40,27 @@
       </form>
     </div>
   </div>
-  <script src="{{ asset('/js/app.js') }}"></script>
-</body>
-</html>
+
+  <div class="container mx-auto bg-white mt-4">
+    @if($posts->count() > 0)
+      @foreach($posts as $post)
+        <div class="px-6 py-4 mb-2 border-b">
+          <div class="flex items-center">
+            <span class="font-semibold">Post ID ({{ $post->id }}) </span>
+            <form action="{{ route('post.delete') }}" method="POST">
+              @method('delete')
+              @csrf
+              <input type="hidden" name="id" value="{{ $post->id }}">
+              <button type="submit" class="ml-2 text-red-600 text-sm hover:bg-red-200 rounded px-1">
+                Eliminar
+              </button>
+            </form>
+          </div>
+          <p>{{ $post->content }}</p>
+        </div>
+      @endforeach
+    @else
+      <p class="text-gray-600 py-4 px-4 text-center">There are no posts yet!</p>
+    @endif
+  </div>
+@endsection

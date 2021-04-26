@@ -18,4 +18,7 @@ use App\Http\Controllers\PostController;
 Route::get('/', [HomeController::class, 'homepage']);
 
 // Posts
-Route::post('/post/create', [PostController::class, 'create']);
+Route::prefix('/post')->name('post.')->group(function() {
+  Route::post('/create', [PostController::class, 'create'])->name('create');
+  Route::delete('/delete', [PostController::class, 'delete'])->name('delete');
+});
