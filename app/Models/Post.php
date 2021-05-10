@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
+    /**
+     * Relacion entre EL post y EL usuario.
+     */
+    public function user() {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }

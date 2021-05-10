@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Post;
 use App\Http\Requests\PostStoreRequest;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ class PostController extends Controller
         $post = new Post();
         $post->content = $request->get('content');
         $post->title = $request->get('title');
+        $post->user_id = Auth::id();
         $post->save();
         
         return back()

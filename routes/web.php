@@ -19,8 +19,7 @@ use App\Http\Middleware\AuthMiddleware;
 */
 
 Route::get('/', [HomeController::class, 'homepage'])
-  ->name('home')
-  ->middleware(AuthMiddleware::class);
+  ->name('home');
 
 // Authentication
 Route::prefix('/auth')->name('auth.')->group(function() {
@@ -33,7 +32,9 @@ Route::prefix('/auth')->name('auth.')->group(function() {
 
 // Posts
 Route::prefix('/post')->name('post.')->group(function() {
-  Route::post('/create', [PostController::class, 'create'])->name('create');
-  Route::delete('/delete', [PostController::class, 'delete'])->name('delete');
+  Route::middleware(AuthMiddleware::class)->group(function() {
+    Route::post('/create', [PostController::class, 'create'])->name('create');
+    Route::delete('/delete', [PostController::class, 'delete'])->name('delete');
+  });
   Route::get('/{id}', [PostController::class, 'show'])->name('show');
 });
