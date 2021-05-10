@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\GuestMiddleware;
+use App\Http\Middleware\AuthMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,9 @@ use App\Http\Middleware\GuestMiddleware;
 |
 */
 
-Route::get('/', [HomeController::class, 'homepage'])->name('home');
+Route::get('/', [HomeController::class, 'homepage'])
+  ->name('home')
+  ->middleware(AuthMiddleware::class);
 
 // Authentication
 Route::prefix('/auth')->name('auth.')->group(function() {

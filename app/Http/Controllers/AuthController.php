@@ -11,7 +11,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request) {
+public function login(Request $request) {
         $credentials = $request->validate([
             'username' => 'required|exists:users,username',
             'password' => 'required|min:3'
@@ -29,7 +29,6 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request) {
-        if (!Auth::check()) return redirect(route('home'));
         Auth::logout();
         return redirect(route('home'));
     }
