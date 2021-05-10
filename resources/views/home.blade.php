@@ -6,12 +6,6 @@
       <form class="w-full px-6" action="{{ route('post.create') }}" method="POST">
         @csrf
         <div class="flex flex-col mb-4">
-          @if(Session::has('success_message'))
-            <div class="bg-green-100 text-green-600 border border-green-300 px-4 py-2 rounded mb-2">
-              {{ Session::get('success_message') }}
-            </div>
-          @endif
-
           <div class="flex flex-col mb-2 w-1/2">
             <label for="title" class="text-sm font-bold text-gray-700">Titulo del post</label>
             <input type="text" name="title" class="px-2 py-1 text-gray-900 rounded border" placeholder="Some title">
