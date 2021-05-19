@@ -8,36 +8,18 @@
   <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 </head>
 <body class="bg-gray-100 pt-24">
-  <nav class="flex w-full items-center bg-gray-200 fixed top-0 left-0 h-24 border-b">
-    <div class="container mx-auto">
-      <div class="flex justify-between">
-        <div class="flex items-center">
-          <a class="px-4" href="{{ route('home') }}">Home</a>
-          <a class="px-4" href="#">Posts</a>
-          <a class="px-4" href="#">Profile</a>
-        </div>
+  <x-top-navigation-bar :user="Auth::user()" :links="[
+    [
+      'route' => route('home'),
+      'label' => 'Home'
+    ],
+    [
+      'route' => '#',
+      'label' => 'Profile'
+    ]
+  ]" />
 
-        <div class="flex items-center">
-          @auth
-            <div class="px-4">
-              <span>Usuario: </span>
-              <span class="font-bold">{{ Auth::user()->username }}</span>
-            </div>
-            <form action="{{ route('auth.logout') }}" method="post" class="px-4">
-              @csrf
-              <button type="submit" class="bg-red-300 text-red-700 px-2 py-1 rounded hover:bg-red-400">
-                Logout
-              </button>
-            </form>
-          @else
-            <a class="px-4" href="{{ route('auth.loginForm') }}">
-              Login
-            </a>
-          @endauth
-        </div>
-      </div>
-    </div>
-  </nav>
+  
 
   <div class="px-6 py-4">
     <h1 class="text-4xl font-bold text-center">{{ config('app.name') }}</h1>
