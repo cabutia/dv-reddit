@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function homepage() 
     {
         $posts = Post::all();
-        return view('home')
+        return view('pages.home.home')
             ->with([
                 'posts' => $posts
             ]);

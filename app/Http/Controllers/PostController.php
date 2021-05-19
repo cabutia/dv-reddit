@@ -36,7 +36,7 @@ class PostController extends Controller
     public function show(string $id) {
         try {
             $post = Post::findOrFail($id);
-            return view('post.show')->with([
+            return view('pages.posts.show.show')->with([
                 'post' => $post
             ]);
         } catch (ModelNotFoundException $e) {
