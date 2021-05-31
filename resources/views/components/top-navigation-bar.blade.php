@@ -7,6 +7,11 @@
                         {{ $link['label'] }}
                     </a>
                 @endforeach
+                @role('admin')
+                    <a class="px-4" href="{{ route('admin.roles.view') }}">
+                        Administrar permisos
+                    </a>
+                @endrole
             </div>
 
             <div class="flex items-center">

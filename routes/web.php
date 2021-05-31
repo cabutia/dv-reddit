@@ -5,8 +5,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\RolesController;
 use App\Http\Middleware\GuestMiddleware;
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\AdminMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +46,12 @@ Route::prefix('/profile')->name('profile.')->group(function() {
   Route::middleware(AuthMiddleware::class)->group(function() {
     Route::get('/', [ProfileController::class, 'view'])->name('view');
     Route::get('/avatar', [ProfileController::class, 'avatar'])->name('avatar');
+  });
+});
+
+// Admin
+Route::prefix('/admin')->name('admin.')->group(function() {
+  Route::middleware(AdminMiddleware::class)->group(function() {
+    Route::get('/roles', [RolesController::class, 'view'])->name('roles.view');
   });
 });

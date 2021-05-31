@@ -1,3 +1,15 @@
+@php
+$navLinks = [
+  [
+    'route' => route('home'),
+    'label' => 'Home'
+  ],
+  [
+    'route' => route('profile.view'),
+    'label' => 'Profile'
+  ]
+];
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +20,7 @@
   <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 </head>
 <body class="bg-gray-100 pt-24">
-  <x-top-navigation-bar :user="Auth::user()" :links="[
-    [
-      'route' => route('home'),
-      'label' => 'Home'
-    ],
-    [
-      'route' => route('profile.view'),
-      'label' => 'Profile'
-    ]
-  ]" />
+  <x-top-navigation-bar :user="Auth::user()" :links="$navLinks" />
 
   
 
