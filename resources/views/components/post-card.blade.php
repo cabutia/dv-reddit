@@ -1,12 +1,12 @@
 <div class="px-2 mb-2 w-1/4">
     <div class="flex flex-col bg-white px-6 py-4 border-b rounded">
-        <div class="flex items-center justify-between">
+        <div class="flex justify-between">
             <span class="font-semibold">{{ $post->title }}</span>
             <a 
                 href="{{ route('post.show', [
                 'id' => $post->id
                 ]) }}" 
-                class="ml-2 text-blue-400 px-2 rounded hover:bg-blue-50">
+                class="ml-2 text-blue-400 px-2 rounded hover:bg-blue-50 whitespace-nowrap">
                 Leer mas
             </a>
         </div>

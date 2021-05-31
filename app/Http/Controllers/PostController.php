@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Post;
 use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\PostDeleteRequest;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PostController extends Controller
 {
     public function create(PostStoreRequest $request) {
+        
         $post = new Post();
         $post->content = $request->get('content');
         $post->title = $request->get('title');
@@ -21,11 +23,7 @@ class PostController extends Controller
             ->withSuccessMessage('Post created successfully!');
     }
 
-    public function delete(Request $request) {
-        $request->validate([
-            'id' => 'numeric|exists:posts,id'
-        ]);
-        
+    public function delete(PostDeleteRequest $request) {
         $post = Post::find($request->get('id'));
         $post->delete();
 

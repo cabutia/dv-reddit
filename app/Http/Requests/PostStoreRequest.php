@@ -2,10 +2,22 @@
 
 namespace App\Http\Requests;
 
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostStoreRequest extends FormRequest
 {
+
+    /**
+     * Checks if the user is authorized to execute this action
+     * 
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return Auth::user()->can('create posts');
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

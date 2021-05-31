@@ -19,8 +19,7 @@ use App\Http\Middleware\AuthMiddleware;
 |
 */
 
-Route::get('/', [HomeController::class, 'homepage'])
-  ->name('home');
+Route::get('/', [HomeController::class, 'homepage'])->name('home');
 
 // Authentication
 Route::prefix('/auth')->name('auth.')->group(function() {
