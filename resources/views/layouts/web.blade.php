@@ -14,7 +14,7 @@
       'label' => 'Home'
     ],
     [
-      'route' => '#',
+      'route' => route('profile.view'),
       'label' => 'Profile'
     ]
   ]" />
@@ -45,7 +45,9 @@
 
   @yield('content')
 
-  @yield('footer')
+  <div class="container mx-auto">
+    @yield('footer')
+  </div>
   
   <script src="{{ asset('/js/app.js') }}"></script>
 </body>

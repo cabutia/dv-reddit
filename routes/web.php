@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\GuestMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 
@@ -37,4 +38,12 @@ Route::prefix('/post')->name('post.')->group(function() {
     Route::delete('/delete', [PostController::class, 'delete'])->name('delete');
   });
   Route::get('/{id}', [PostController::class, 'show'])->name('show');
+});
+
+// Profile
+Route::prefix('/profile')->name('profile.')->group(function() {
+  Route::middleware(AuthMiddleware::class)->group(function() {
+    Route::get('/', [ProfileController::class, 'view'])->name('view');
+    Route::get('/avatar', [ProfileController::class, 'avatar'])->name('avatar');
+  });
 });
