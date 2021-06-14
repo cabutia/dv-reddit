@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Models\Post;
+use Illuminate\Support\Collection;
 
 interface PostRepository
 {
@@ -15,4 +16,19 @@ interface PostRepository
      * @return Post   The created post
      */
     public function create(string $title, string $content, User $author): Post;
+
+    /**
+     * @todo Document delete function
+     */
+    public function delete(int $id): bool;
+
+    /**
+     * @todo Document find function
+     */
+    public function find(int $id):? Post;
+
+    /**
+     * @todo Document all function
+     */
+    public function all(): Collection;
 }

@@ -32,22 +32,23 @@ class PostController extends Controller
     }
 
     public function delete(PostDeleteRequest $request) {
-        $post = Post::find($request->get('id'));
-        $post->delete();
+        $id = $request->get('id');
+        $this->postRepository->delete($id);
 
         return redirect(route('home'))
-            ->withSuccessMessage('Post (id: ' . $post->id . ') deleted successfully!');
+            ->withSuccessMessage('Post deleted successfully!');
     }
 
     public function show(string $id) {
-        try {
-            $post = Post::findOrFail($id);
-            return view('pages.posts.show.show')->with([
-                'post' => $post
-            ]);
-        } catch (ModelNotFoundException $e) {
-            return redirect(route('home'))->withErrorMessage("The requested post (id: $id) was not found.");
+        $post = $this->postRepository->find($id);
+        
+        if (!$post) {
+            return redirect(route('home'))
+                ->withErrorMessage("The requested post (id: $id) was not found.");
         }
         
+        return view('pages.posts.show.show')->with([
+            'post' => $post
+        ]);   
     }
 }

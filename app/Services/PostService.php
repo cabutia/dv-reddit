@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Post;
 use App\Repositories\PostRepository;
+use Illuminate\Support\Collection;
 
 class PostService implements PostRepository
 {
@@ -19,5 +20,33 @@ class PostService implements PostRepository
         $post->user_id = $author->id;
         $post->save();
         return $post;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete(int $id): bool
+    {
+        $post = Post::find($id);
+        $post->delete();
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function find(int $id):? Post
+    {
+        $post = Post::find($id);
+        return $post;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function all(): Collection
+    {
+        $posts = Post::all();
+        return $posts;
     }
 }
