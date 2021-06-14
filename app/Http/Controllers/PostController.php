@@ -8,16 +8,18 @@ use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostDeleteRequest;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Services\PostService;
 
 class PostController extends Controller
 {
     public function create(PostStoreRequest $request) {
         
-        $post = new Post();
-        $post->content = $request->get('content');
-        $post->title = $request->get('title');
-        $post->user_id = Auth::id();
-        $post->save();
+        $postService = new PostService();
+        $postService->create(
+            $request->get('title'),
+            $request->get('content'),
+            Auth::user()
+        );
         
         return back()
             ->withSuccessMessage('Post created successfully!');
