@@ -4,25 +4,13 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Repositories\PostRepository;
+use App\Services\PostService;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
+    public $bindings = [
+        PostRepository::class => PostService::class
+    ];
 }

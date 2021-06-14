@@ -9,13 +9,19 @@ use App\Http\Requests\PostDeleteRequest;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Services\PostService;
+use App\Repositories\PostRepository;
 
 class PostController extends Controller
 {
+    public $postRepository;
+
+    public function __construct(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
     public function create(PostStoreRequest $request) {
-        
-        $postService = new PostService();
-        $postService->create(
+        $this->postRepository->create(
             $request->get('title'),
             $request->get('content'),
             Auth::user()

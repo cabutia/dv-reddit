@@ -175,6 +175,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Custom service providers
+         */
+        // php artisan make:provider RepositoryServiceProvider
+         App\Providers\RepositoryServiceProvider::class,
     ],
 
     /*
